@@ -5,3 +5,6 @@ data/*/*.tsv
 data/*/*.zip
 features/*.feather
 features/importances/*.png
+kaggle.json
+untitled0.ipynb
+titanic.zip
