@@ -1,0 +1,2 @@
+DEBUG:root:./logs/log_20240420104349.log
+DEBUG:root:['age', 'embarked', 'family_size', 'fare', 'pclass', 'sex']

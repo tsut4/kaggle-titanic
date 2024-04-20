@@ -8,3 +8,9 @@ features/importances/*.png
 kaggle.json
 Untitled0.ipynb
 titanic.zip
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class

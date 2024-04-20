@@ -2,9 +2,9 @@ import pandas as pd
 
 
 def load_datasets(feats):
-    dfs = [pd.read_feather(f'feathers/{f}_train.feather') for f in feats]
+    dfs = [pd.read_feather(f'features/{f}_train.feather') for f in feats]
     X_train = pd.concat(dfs, axis=1, sort=False)
-    dfs = [pd.read_feather(f'feathers/{f}_test.feahter') for f in feats]
+    dfs = [pd.read_feather(f'features/{f}_test.feather') for f in feats]
     X_test = pd.concat(dfs, axis=1, sort=False)
     return X_train, X_test
 
