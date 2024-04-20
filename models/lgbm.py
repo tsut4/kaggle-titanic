@@ -14,22 +14,25 @@ def train_and_predict(X_train, X_valid, y_train, y_valid, X_test, lgbm_params):
 
     # ロガーの作成
     logger = logging.getLogger('main')
-    callbacks = [log_evaluation(logger, period=30)]
+    callbacks = [lgb.early_stopping(stopping_rounds=10, verbose=True),
+                 lgb.log_evaluation(logger, period=30)]
 
     # 上記のパラメータでモデルを学習する
     model = lgb.train(
         lgbm_params, lgb_train,
         # モデルの評価用データを渡す
         valid_sets=lgb_eval,
-        # 最大で1000ラウンドまで学習する
+        # 最大で 1000 ラウンドまで学習する
         num_boost_round=1000,
-        # 10ラウンド経過しても性能が向上しないときは学習を打ち切る
-        early_stopping_rounds=10,
+        # 10 ラウンド経過しても性能が向上しないときは学習を打ち切る
+        # early_stopping_rounds=10 light 4.1.0現在サポートしていないので
+        # log_evaluation同様callbacks引数にコールバック関数lightgbm.early_stopping()をリスト指定する。
+
         # ログ
         callbacks=callbacks
     )
 
-    #テストデータを予測する
+    # テストデータを予測する
     y_pred = model.predict(X_test, num_iteration=model.best_iteration)
 
     return y_pred, model
