@@ -1,2 +1,0 @@
-DEBUG:root:./logs/log_20240420104743.log
-DEBUG:root:['age', 'embarked', 'family_size', 'fare', 'pclass', 'sex']
