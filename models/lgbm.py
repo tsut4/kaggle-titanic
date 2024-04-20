@@ -14,8 +14,8 @@ def train_and_predict(X_train, X_valid, y_train, y_valid, X_test, lgbm_params):
 
     # ロガーの作成
     logger = logging.getLogger('main')
-    callbacks = [lgb.early_stopping(stopping_rounds=10, verbose=True),
-                 lgb.log_evaluation(logger, period=30)]
+    callbacks = [lgb.early_stopping(stopping_rounds=10, verbose=True), \
+                 log_evaluation(logger=logger, period=30)]
 
     # 上記のパラメータでモデルを学習する
     model = lgb.train(

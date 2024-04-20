@@ -1,0 +1,14 @@
+DEBUG:root:./logs/log_20240420122255.log
+DEBUG:root:['age', 'embarked', 'family_size', 'fare', 'pclass', 'sex']
+DEBUG:root:(891, 6)
+DEBUG:root:{'learning_rate': 0.1, 'num_leaves': 8, 'boosting_type': 'gbdt', 'colsample_bytree': 0.65, 'reg_alpha': 1, 'reg_lambda': 1, 'objective': 'multiclass', 'num_class': 2}
+DEBUG:root:61
+DEBUG:root:0.41297175216791043
+DEBUG:root:{'learning_rate': 0.1, 'num_leaves': 8, 'boosting_type': 'gbdt', 'colsample_bytree': 0.65, 'reg_alpha': 1, 'reg_lambda': 1, 'objective': 'multiclass', 'num_class': 2}
+DEBUG:root:100
+DEBUG:root:0.40343740612226286
+DEBUG:root:{'learning_rate': 0.1, 'num_leaves': 8, 'boosting_type': 'gbdt', 'colsample_bytree': 0.65, 'reg_alpha': 1, 'reg_lambda': 1, 'objective': 'multiclass', 'num_class': 2}
+DEBUG:root:54
+DEBUG:root:0.464100416525438
+DEBUG:root:[0.41297175216791043, 0.40343740612226286, 0.464100416525438]
+DEBUG:root:0.42683652493853713

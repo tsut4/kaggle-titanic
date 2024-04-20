@@ -3,7 +3,7 @@ from lightgbm.callback import _format_eval_result
 
 
 def log_best(model, metric):
-    logging.debug(model.best_instruction)
+    logging.debug(model.best_iteration)
     logging.debug(model.best_score['valid_0'][metric])
 
 
