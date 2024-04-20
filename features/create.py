@@ -19,28 +19,28 @@ class Sex(Feature):
         self.test['Sex'] = test['Sex'].replace(['male', 'female'], [0, 1])
 
 
-class FamiliSize(Feature):
+class FamilySize(Feature):
     def create_features(self):
-        self.train['FamiliSize'] = train['Parch'] + train['SibSp'] + 1
-        self.test['FamiliSize'] = test['Parch'] + test['SibSp'] + 1
+        self.train['FamilySize'] = train['Parch'] + train['SibSp'] + 1
+        self.test['FamilySize'] = test['Parch'] + test['SibSp'] + 1
 
 
 class Embarked(Feature):
     def create_features(self):
         self.train['Embarked'] = train['Embarked'] \
             .fillna(('S')) \
-            .map({'S': 0, 'C' : 1, 'Q' : 2}) \
+            .map({'S': 0, 'C': 1, 'Q': 2}) \
             .astype(int)
         self.test['Embarked'] = test['Embarked'] \
             .fillna(('S')) \
-            .map({'S': 0, 'C' : 1, 'Q' : 2}) \
+            .map({'S': 0, 'C': 1, 'Q': 2}) \
             .astype(int)
 
 
 class Fare(Feature):
     def create_features(self):
-        data = train.append(test)
-        fare_mean = data['Fare']
+        data = pd.concat([train, test], ignore_index=True)
+        fare_mean = data['Fare'].mean()
         self.train['Fare'] = pd.qcut(
             train['Fare'].fillna(fare_mean),
             4,
@@ -55,7 +55,7 @@ class Fare(Feature):
 
 class Age(Feature):
     def create_features(self):
-        data = train.append(test)
+        data = pd.concat([train, test], ignore_index=True)
         age_mean = data['Age'].mean()
         age_std = data['Age'].std()
         self.train['Age'] = pd.qcut(
@@ -76,7 +76,7 @@ class Age(Feature):
 
 def get_title(name):
     title_search = re.search(' ([A-Za-z]+)\.', name)
-    #If the titile exists, extract and return it.
+    # If the title exists, extract and return it.
     if title_search:
         return title_search.group(1)
     return ""
@@ -84,7 +84,7 @@ def get_title(name):
 
 class Title(Feature):
     def create_features(self):
-        title_mapping = {"Mr": 1, "Miss":2, "Mrs": 3, "Master": 4, "Rare": 5}
+        title_mapping = {"Mr": 1, "Miss": 2, "Mrs": 3, "Master": 4, "Rare": 5}
 
         train['Title'] = train['Name'] \
             .apply(get_title) \
@@ -99,7 +99,7 @@ class Title(Feature):
                 'Rev',
                 'Sir',
                 'Jonkheer',
-                'Dona',
+                'Dona'
             ], 'Rare') \
             .replace(['Mlle', 'Ms', 'Mme'], ['Miss', 'Miss', 'Mrs'])
         train['Title'] = train['Name'].map(title_mapping).fillna(0)
@@ -116,14 +116,14 @@ class Title(Feature):
                 'Rev',
                 'Sir',
                 'Jonkheer',
-                'Dona',
+                'Dona'
             ], 'Rare') \
             .replace(['Mlle', 'Ms', 'Mme'], ['Miss', 'Miss', 'Mrs'])
-        test['Title'] = test['Name'].map(title_mapping).fillna(0)
+        test['Title'] = test['Title'].map(title_mapping).fillna(0)
 
         self.train['Title'] = train['Title']
         self.test['Title'] = test['Title']
-        
+
 
 if __name__ == '__main__':
     args = get_arguments()

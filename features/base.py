@@ -19,7 +19,7 @@ def timer(name):
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--force', '-f', action='store_true', help='Overwrite extisting files'
+        '--force', '-f', action='store_true', help='Overwrite existing files'
     )
     return parser.parse_args()
 
@@ -51,10 +51,10 @@ class Feature(metaclass=ABCMeta):
             self.name = re.sub(
                 "([A-Z])",
                 lambda x: "_" + x.group(1).lower(), self.__class__.__name__
-            ).lstirp('_')
+            ).lstrip('_')
 
-        self.train = pd.Dataframe()
-        self.test = pd.Dataframe()
+        self.train = pd.DataFrame()
+        self.test = pd.DataFrame()
         self.train_path = Path(self.dir) / f'{self.name}_train.feather'
         self.test_path = Path(self.dir) / f'{self.name}_test.feather'
 
@@ -66,11 +66,11 @@ class Feature(metaclass=ABCMeta):
             self.train.columns = prefix + self.train.columns + suffix
             self.test.columns = prefix + self.test.columns + suffix
         return self
-    
+
     @abstractmethod
     def create_features(self):
         raise NotImplementedError
-    
+
     def save(self):
         self.train.to_feather(str(self.train_path))
         self.test.to_feather(str(self.test_path))
